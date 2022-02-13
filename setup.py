@@ -5,9 +5,9 @@ setup(
     version='1.0.0',
     packages=['ms_coookiejar'],
     package_dir={'ms_cookiejar': 'ms_cookiejar'},
-    author='yportne8',
+    author='CS Kim',
     author_email='yportne8@gmail.com',
-    description='Loads decrypted cookiejars from chromium-based browsers running on microsoft windows machines.',
+    description='Loads http.cookiejar.FileCookieJars with decrypted cookies from chromium-based browsers running on microsoft windows machines.',
     url='https://github.com/yportne8/Microsoft-CookieJar',
-    install_requires=[],
+    install_requires=["pycryptodome"],
     license='MIT')

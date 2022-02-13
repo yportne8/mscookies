@@ -73,6 +73,8 @@ class Browser(Browsers):
         self.user_data = self._user_data()
         self.local_state = self._local_state()
 
+
+
     def __str__(self):
         if self.browser_path:
             return str(self.browser_path)
@@ -100,7 +102,8 @@ class Browser(Browsers):
                     return p
             self._doesnotexist(user_data, self.browser_path)
         except BrowserNameError as e:
-            msg = "Available browser names:"
+            msg = "Unknown browser_name..."
+            msg += "Available browser names:"
             print(msg)
             print(self.browser_paths().keys())
 
@@ -190,30 +193,27 @@ class Profile(Browser):
         print(msg)
 
 
-class Cookies(Profile):
+class Cookies(Profile): # Adapted from https://github.com/borisbabic/browser_cookie3
 
     def __init__(self, browser_name: str, profile_name: str):
         super().__init__(browser_name, profile_name)
         self.keys = ["host_key", "is_secure", "expires_utc",
                      "name", "encrypted_value"]
-        cookies = Path(os.environ["TEMP"], "ChromiumCookies")
+        cookies = Path(os.environ["TEMP"], "Cookies")
         try:
             with open(cookies, "wb+") as temp_cookies:
                 with open(self.cookies, "rb") as data:
                     temp_cookies.write(data.read())
-            self.cookies = temp_cookies
-            atexit.register(self.cookies.unlink)
+            self.cookies = cookies
+            atexit.register(self.__del__)
         except:
             msg = f"Unable to retrieve cookies file from {profile_name}"
             self.cookies = None
             print(msg)
-            
-    
+
     def __del__(self):
-        try:
-            self.temp_cookiefile.unlink()
-        except:
-            pass
+        if self.cookies.exists():
+            self.cookies.unlink()
     
     def __keydpapi(self):
         try:
@@ -225,7 +225,7 @@ class Cookies(Profile):
         except:
             return None
 
-    def __cipher(self):        
+    def __cipher(self):
         cipher = self.__keydpapi()
         if not cipher:
             msg = "Failed to retrieve cipher from Local State."
@@ -272,20 +272,54 @@ class Cookies(Profile):
                    cookie["expires_utc"], 
                    False, None, None, {})
 
-    def _sql_query(self):
+    def _sql_query(self, domain: str=None):
         criteria = self.keys[0]
         for key in self.keys[1:]:
             criteria += f", {key}"
         query = f"SELECT {criteria} FROM cookies"
-        return query
+        if domain:
+            if domain[0] != ".":
+                domain = f".{domain}"
+            query += " WHERE host_key like ?;"
+            return (query, (f"%{domain}%",))
+        return (query, None)
 
-    def cookiejar(self):
+    def cookiejar(self, domain: str=None):
+        cookiejar = FileCookieJar()
         con = sqlite3.connect(self.cookies)
         cur = con.cursor()
-        cur.execute(self._sql_query())
-        cookiejar = FileCookieJar()
-        for cookie_raw in cur.fetchall():
-            cookie = self._cookie(cookie_raw)
-            cookiejar.set_cookie(cookie)
-        con.close()
-        return cookiejar
+        try:
+            if domain:
+                query, domain = self._sql_query(domain)
+                cur.execute(query, domain)
+            else:
+                query, _ = self._sql_query()
+                cur.execute(query)
+            for cookie_raw in cur.fetchall():
+                cookie = self._cookie(cookie_raw)
+                cookiejar.set_cookie(cookie)
+            con.close()
+            return cookiejar
+        except Exception as e:
+            msg = "cookie" if domain else "cookiejar"
+            msg = f"Unable to load {msg}:\n"
+            msg += f"Exception: {str(e)}"
+            print(msg)
+
+    def cookie(self, domain: str):
+        cookie = self.cookiejar(domain)
+        return cookie
+
+    def cookiestring(self, domain: str):
+        cookie = self.cookie(domain)
+        domain = list(cookie._cookies.keys())[0]
+        cookies = cookie._cookies[domain]["/"]
+        if cookies:
+            cookielist = \
+                [f"{cookie.name}={cookie.value}" \
+                 for cookie in cookies.values()]
+            cookiestring = "; ".join(cookielist)
+            return cookiestring
+        else:
+            msg = "Failed to generate cookiestring."
+            print(msg)
