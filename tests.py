@@ -1,6 +1,7 @@
 import unittest
-from http.cookiejar import Cookie, FileCookieJar
-from ms_cookiejar import Browsers, Browser, Profile, Cookies
+from ms_cookiejar import (Browsers, Browser,
+                          Profile, Cookies,
+                          CookieJar)
 
 
 class TestWindowsPaths(unittest.TestCase):
@@ -29,17 +30,29 @@ class TestCookies(unittest.TestCase):
     def test_cookiejar(self):
         cookies = Cookies("Edge", "default")
         cookiejar = cookies.cookiejar()
-        self.assertTrue(type(cookiejar)==FileCookieJar)
+        self.assertTrue(type(cookiejar)==CookieJar)
 
     def test_cookie(self):
         cookies = Cookies("edge", "default")
         cookie = cookies.cookie("google.com")
-        self.assertTrue(type(cookie)==FileCookieJar)
+        self.assertTrue(type(cookie)==CookieJar)
 
     def test_cookiestring(self):
         cookies = Cookies("edge", "Default")
         cookiestring = cookies.cookiestring("google.com")
         self.assertTrue(type(cookiestring)==str)
+
+    def test_save_cookiejar(self):
+        cookies = Cookies("Edge", "Default")
+        cookiejar = cookies.cookiejar()
+        cookiejar_text = cookiejar.save()
+        self.assertTrue(cookiejar_text.exists())
+
+    def test_save_cookie(self):
+        cookies = Cookies("Edge", "Default")
+        cookie = cookies.cookie("google.com")
+        cookie_text = cookie.save()
+        self.assertTrue(cookie_text.exists())
 
 
 

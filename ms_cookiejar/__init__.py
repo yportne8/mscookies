@@ -1,11 +1,11 @@
 import os
-import json 
+import json
 import atexit
 import sqlite3
 from pathlib import Path, WindowsPath
 from base64 import b64decode
 from Crypto.Cipher import AES
-from http.cookiejar import Cookie, FileCookieJar
+from http.cookiejar import Cookie, CookieJar, LWPCookieJar
 from ctypes import (create_string_buffer, memmove, byref,
                     POINTER, Structure, wintypes, windll,
                     c_char, c_wchar_p)
@@ -18,6 +18,23 @@ class BrowserNameError(Exception):
 class DataBlob(Structure):
     _fields_ = [('cbData', wintypes.DWORD),
                 ('pbData', POINTER(c_char))]
+
+
+class CookieJar(CookieJar):
+    
+    # Allows for savedto message and returning path
+
+    def __init__(self, path: Path):
+        super().__init__()
+        self.path = path            
+        
+    def save(self):
+        cookiejar = LWPCookieJar(str(self.path))
+        for cookie in self:
+            cookiejar.set_cookie(cookie)
+        cookiejar.save()
+        print(f"Cookies save to {str(self.path)}")
+        return self.path
 
 
 class Browsers:
@@ -63,17 +80,15 @@ class Browser(Browsers):
                 print(list(self.browser_paths().keys()))
                 browser_path = None
             else:
-                browser_path =browser_paths[browser_name]
+                browser_path = Path(browser_paths[browser_name])
         else:
             browser_path = None
-        self.browser_path = Path(browser_path)
+        self.browser_path = browser_path
         for kwarg in kwargs:
             names[kwarg] = kwargs[kwarg]
         self.names = names
         self.user_data = self._user_data()
         self.local_state = self._local_state()
-
-
 
     def __str__(self):
         if self.browser_path:
@@ -124,7 +139,7 @@ class Browser(Browsers):
                 for name in self.names["profiles"]:
                     split_p_name = p.name.split(" ")
                     if name in p.name:
-                        profiles[name] = p
+                        profiles[p.name] = p
             return profiles
         except:
             return profiles
@@ -193,7 +208,9 @@ class Profile(Browser):
         print(msg)
 
 
-class Cookies(Profile): # Adapted from https://github.com/borisbabic/browser_cookie3
+class Cookies(Profile):
+
+    # Decryption algo adapted from https://github.com/borisbabic/browser_cookie3
 
     def __init__(self, browser_name: str, profile_name: str):
         super().__init__(browser_name, profile_name)
@@ -228,8 +245,7 @@ class Cookies(Profile): # Adapted from https://github.com/borisbabic/browser_coo
     def __cipher(self):
         cipher = self.__keydpapi()
         if not cipher:
-            msg = "Failed to retrieve cipher from Local State."
-            print(msg)
+            print("Failed to retrieve cipher from Local State.")
             return None
         unprotect = windll.crypt32.CryptUnprotectData
         desc = c_wchar_p()
@@ -284,17 +300,22 @@ class Cookies(Profile): # Adapted from https://github.com/borisbabic/browser_coo
             return (query, (f"%{domain}%",))
         return (query, None)
 
+    def _cookiejar(self, domain: str):
+        if domain:
+            path = Path(self.profile_path,
+                        f"{domain.strip('.')} Cookies.txt")
+        else:
+            path = Path(self.profile_path, "Cookies.txt")
+        cookiejar = CookieJar(path)
+        return cookiejar
+
     def cookiejar(self, domain: str=None):
-        cookiejar = FileCookieJar()
-        con = sqlite3.connect(self.cookies)
-        cur = con.cursor()
+        cookiejar = self._cookiejar(domain)
         try:
-            if domain:
-                query, domain = self._sql_query(domain)
-                cur.execute(query, domain)
-            else:
-                query, _ = self._sql_query()
-                cur.execute(query)
+            con = sqlite3.connect(self.cookies)
+            cur = con.cursor()
+            query, domain = self._sql_query(domain)
+            cur.execute(query,domain) if domain else cur.execute(query)
             for cookie_raw in cur.fetchall():
                 cookie = self._cookie(cookie_raw)
                 cookiejar.set_cookie(cookie)
