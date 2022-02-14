@@ -7,19 +7,19 @@ more-or-less the same, although its been streamlined for use with Chromium-Based
 
 ## Installation via PyPi:
 ```
-pip install ms_cookiejar
+pip install mscookies
 ```
 
 ## Installation from source:
 ```
-git clone https://github.com/yportne8/Microsoft-CookieJar.git
-cd Microsoft-CookieJar
+git clone https://github.com/yportne8/MS-Cookies.git
+cd MS-Cookies
 python setup.py install
 ```
 
 ### Identify the main directory for locally installed Chromium-based Browsers.
 ```python
-from ms_cookiejar import Cookies
+from mscookies import Cookies
 
 >>> Cookies.CHROMIUM_BASED
 ['Opera', 'Opera Next', 'Opera Developer', 
@@ -37,7 +37,7 @@ from ms_cookiejar import Cookies
 
 ### Determine what profiles are stored within a browser.
 ```python
->>> from ms_cookiejar import Browser
+>>> from mscookies import Browser
 >>> browser = Browser(browser_name="edge beta")
 >>> browser.profiles()
 {'Default': WindowsPath('C:/Users/username/AppData/Local/Microsoft/Edge Beta/User Data/Default'),
@@ -47,7 +47,7 @@ from ms_cookiejar import Cookies
 ### User Data paths
 Along with the static browser_paths function, the Cookies object retains all paths from the parent classes Profile and Browser.
 ```python
->>> from ms_cookiejar import Cookies
+>>> from mscookies import Cookies
 >>> cookies = Cookies(browser_name="edge beta", profile_name="default")
 >>> cookies.browser_path
 WindowsPath('C:/Users/username/AppData/Local/Microsoft/Edge Beta')
@@ -62,7 +62,7 @@ WindowsPath('C:/Users/username/AppData/Local/Microsoft/Edge Beta/User Data/Edge 
 ### Cookies file
 A temporary copy of the Cookies file is created on init of class Cookies.
 ```python
->>> from ms_cookiejar import Cookies
+>>> from mscookies import Cookies
 >>> cookies = Cookies("edge beta", "default")
 >>> cookies.cookies
 WindowsPath('C:/Users/username/AppData/Local/Temp/Cookies')
@@ -89,7 +89,7 @@ WindowsPath('C:/Users/username/AppData/Local/Microsoft/Edge/User Data/Default/go
 ### Cookiestring function
 Returns a string that can be embedded into request headers.
 ```python
->>> from ms_cookiejar import Cookies
+>>> from mscookies import Cookies
 >>> cookies = Cookies(browser_name="edge", "profile 1")
 >>> cookiestring = cookies.cookiestring("youtube.com")
 >>> headers_auth = {
