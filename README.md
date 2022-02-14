@@ -1,6 +1,6 @@
 # MS-Cookies
 
-Microsoft-CookieJar (ms_cookiejar) is a stripped down fork of browser_cookie3. Browser_cookie3 currently does not work on Chromium-based browsers running
+MS-Cookies (mscookies) is a stripped down fork of browser_cookie3. Browser_cookie3 currently does not work on Chromium-based browsers running
 on Windows machines due to a recent update to Chromium. The update changed the location of the Cookies file from the user profile directory to one of its
 sub-directories (Network). This fork updates its predecessor by including fail-safes around future file/directory changes. The decryption algo remains 
 more-or-less the same, although its been streamlined for use with Chromium-Based browsers running on Windows machines only.
