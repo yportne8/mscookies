@@ -1,8 +1,6 @@
 import unittest
-import subprocess
-from mscookiejar.cookies import (Browsers, Browser,
-                          Profile, Cookies,
-                          CookieJar)
+from mscookies.cookies import (Browsers, Browser,
+                               Profile, Cookies, CookieJar)
 
 
 class TestWindowsPaths(unittest.TestCase):
