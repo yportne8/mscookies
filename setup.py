@@ -6,11 +6,11 @@ from setuptools import find_packages, setup, Command
 
 NAME = 'mscookiejar'
 DESCRIPTION = 'Loads decrypted cookiejar from Chromium-based browsers running on Microsoft Windows machines.'
-URL = 'https://github.com/yportne8/Microsoft-CookieJar',
+URL = "https://github.com/yportne8/Microsoft-CookieJar/"
 EMAIL = 'yportne8@gmail.com'
 AUTHOR = 'CS Kim'
 REQUIRES_PYTHON = '>=3.6.0'
-VERSION = '0.1.0'
+VERSION = '1.0.0'
 
 REQUIRED = ["pycryptodome"]
 EXTRAS = {}
