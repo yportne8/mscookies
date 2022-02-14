@@ -40,8 +40,8 @@ from ms_cookiejar import Cookies
 >>> from ms_cookiejar import Browser
 >>> browser = Browser(browser_name="edge beta")
 >>> browser.profiles()
-{'Default': WindowsPath('C:/Users/g/AppData/Local/Microsoft/Edge Beta/User Data/Default'),
- 'Profile 1': WindowsPath('C:/Users/g/AppData/Local/Microsoft/Edge Beta/User Data/Profile 1')}
+{'Default': WindowsPath('C:/Users/username/AppData/Local/Microsoft/Edge Beta/User Data/Default'),
+ 'Profile 1': WindowsPath('C:/Users/username/AppData/Local/Microsoft/Edge Beta/User Data/Profile 1')}
 ```
 
 ### Along with the static browser_paths function, the Cookies object retains all paths
