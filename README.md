@@ -6,12 +6,12 @@ sub-directories (Network). This fork updates its predecessor by including fail-s
 more-or-less the same, although its been streamlined for use with Chromium-Based browsers running on Windows machines only.
 
 ## Installation via PyPi:
-'''
+```
 pip install ms_cookiejar
-'''
+```
 
 ## Installation from source:
-'''
+```
 pip install git+https://github.com/yportne8/Microsoft-CookieJar.git
 
 or
@@ -19,7 +19,7 @@ or
 git clone https://github.com/yportne8/Microsoft-CookieJar.git
 cd Microsoft-CookieJar
 python setup.py install
-'''
+```
 
 ### Identify the main directory for locally installed Chromium-based Browsers.
 ```python
