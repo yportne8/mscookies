@@ -12,10 +12,6 @@ pip install ms_cookiejar
 
 ## Installation from source:
 ```
-pip install git+https://github.com/yportne8/Microsoft-CookieJar.git
-
-or
-
 git clone https://github.com/yportne8/Microsoft-CookieJar.git
 cd Microsoft-CookieJar
 python setup.py install
