@@ -44,7 +44,8 @@ from ms_cookiejar import Cookies
  'Profile 1': WindowsPath('C:/Users/username/AppData/Local/Microsoft/Edge Beta/User Data/Profile 1')}
 ```
 
-### Along with the static browser_paths function, the Cookies object retains all paths from the parent class Profile and grand-parent class Browser.
+### User Data paths
+Along with the static browser_paths function, the Cookies object retains all paths from the parent classes Profile and Browser.
 ```python
 >>> from ms_cookiejar import Cookies
 >>> cookies = Cookies(browser_name="edge beta", profile_name="default")
@@ -58,7 +59,8 @@ WindowsPath('C:/Users/username/AppData/Local/Microsoft/Edge Beta/User Data/Local
 WindowsPath('C:/Users/username/AppData/Local/Microsoft/Edge Beta/User Data/Edge Profile Picture.png')
 ```
 
-### A temporary copy of the Cookies file is created on init of class Cookies.
+### Cookies file
+A temporary copy of the Cookies file is created on init of class Cookies.
 ```python
 >>> from ms_cookiejar import Cookies
 >>> cookies = Cookies("edge beta", "default")
@@ -66,7 +68,8 @@ WindowsPath('C:/Users/username/AppData/Local/Microsoft/Edge Beta/User Data/Edge 
 WindowsPath('C:/Users/username/AppData/Local/Temp/Cookies')
 ```
 
-### The cookiejar and cookies functions implements a modified version of class http.cookiejar.CookieJar. This approach allows for greater utility than using http.cookiejar.LWPCookieJar, at least when saving the cookiejar as a txt file.
+### cookiejar and cookies functions
+The cookiejar and cookies functions implements a modified version of class http.cookiejar.CookieJar. This approach allows for greater utility than using http.cookiejar.LWPCookieJar, at least when saving the cookiejar as a txt file.
 ```python
 >>> cookiejar = cookies.cookiejar()
 >>> saved_to_path = cookiejar.save()
@@ -83,7 +86,8 @@ Cookies save to C:\Users\username\AppData\Local\Microsoft\Edge\User Data\Default
 WindowsPath('C:/Users/username/AppData/Local/Microsoft/Edge/User Data/Default/google.com Cookies.txt')
 ```
 
-### The cookiestring function returns a string that can be embedded into request headers.
+### cookiestring function
+Returns a string that can be embedded into request headers.
 ```python
 >>> from ms_cookiejar import Cookies
 >>> cookies = Cookies(browser_name="edge", "profile 1")
