@@ -68,7 +68,7 @@ A temporary copy of the Cookies file is created on init of class Cookies.
 WindowsPath('C:/Users/username/AppData/Local/Temp/Cookies')
 ```
 
-### cookiejar and cookies functions
+### Cookiejar and Cookies functions
 The cookiejar and cookies functions implements a modified version of class http.cookiejar.CookieJar. This approach allows for greater utility than using http.cookiejar.LWPCookieJar, at least when saving the cookiejar as a txt file.
 ```python
 >>> cookiejar = cookies.cookiejar()
@@ -86,7 +86,7 @@ Cookies save to C:\Users\username\AppData\Local\Microsoft\Edge\User Data\Default
 WindowsPath('C:/Users/username/AppData/Local/Microsoft/Edge/User Data/Default/google.com Cookies.txt')
 ```
 
-### cookiestring function
+### Cookiestring function
 Returns a string that can be embedded into request headers.
 ```python
 >>> from ms_cookiejar import Cookies
