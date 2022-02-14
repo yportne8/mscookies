@@ -55,9 +55,11 @@ WindowsPath('C:/Users/username/AppData/Local/Microsoft/Edge Beta')
 WindowsPath('C:/Users/username/AppData/Local/Microsoft/Edge Beta/User Data/Default')
 >>> cookies.local_state
 WindowsPath('C:/Users/username/AppData/Local/Microsoft/Edge Beta/User Data/Local State')
+>>> cookies.picture
+WindowsPath('C:/Users/username/AppData/Local/Microsoft/Edge Beta/User Data/Edge Profile Picture.png')
 ```
 
-### A temporary copy of the Cookies file is created on init of class Cookies
+### A temporary copy of the Cookies file is created on init of class Cookies.
 ```python
 >>> from ms_cookiejar import Cookies
 >>> cookies = Cookies("edge beta", "default")
