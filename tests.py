@@ -1,5 +1,6 @@
 import unittest
-from ms_cookiejar import (Browsers, Browser,
+import subprocess
+from mscookiejar.cookies import (Browsers, Browser,
                           Profile, Cookies,
                           CookieJar)
 
@@ -53,7 +54,7 @@ class TestCookies(unittest.TestCase):
         cookie = cookies.cookie("google.com")
         cookie_text = cookie.save()
         self.assertTrue(cookie_text.exists())
-
+        
 
 
 if __name__ == '__main__':
