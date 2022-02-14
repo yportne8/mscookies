@@ -44,8 +44,7 @@ from ms_cookiejar import Cookies
  'Profile 1': WindowsPath('C:/Users/username/AppData/Local/Microsoft/Edge Beta/User Data/Profile 1')}
 ```
 
-### Along with the static browser_paths function, the Cookies object retains all paths
-### from the parent class Profile and grand-parent class Browser.
+### Along with the static browser_paths function, the Cookies object retains all paths from the parent class Profile and grand-parent class Browser.
 ```python
 >>> from ms_cookiejar import Cookies
 >>> cookies = Cookies(browser_name="edge beta", profile_name="default")
@@ -67,9 +66,7 @@ WindowsPath('C:/Users/username/AppData/Local/Microsoft/Edge Beta/User Data/Edge 
 WindowsPath('C:/Users/username/AppData/Local/Temp/Cookies')
 ```
 
-### The cookiejar and cookies functions implements a modified version of class http.cookiejar.CookieJar.
-### This approach allows for greater utility than using http.cookiejar.LWPCookieJar, at least when saving
-### the cookiejar as a txt file.
+### The cookiejar and cookies functions implements a modified version of class http.cookiejar.CookieJar. This approach allows for greater utility than using http.cookiejar.LWPCookieJar, at least when saving the cookiejar as a txt file.
 ```python
 >>> cookiejar = cookies.cookiejar()
 >>> saved_to_path = cookiejar.save()
