@@ -7,7 +7,7 @@ more-or-less the same, although its been streamlined for use with Chromium-Based
 
 ## Installation via PyPi:
 ```
-pip install -m ms_cookiejar
+pip install ms_cookiejar
 ```
 
 ## Installation from source:
