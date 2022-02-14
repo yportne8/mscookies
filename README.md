@@ -52,9 +52,9 @@ from ms_cookiejar import Cookies
 >>> cookies.browser_path
 WindowsPath('C:/Users/username/AppData/Local/Microsoft/Edge Beta')
 >>> cookies.profile_path
-WindowsPath('C:/Users/g/AppData/Local/Microsoft/Edge Beta/User Data/Default')
+WindowsPath('C:/Users/username/AppData/Local/Microsoft/Edge Beta/User Data/Default')
 >>> cookies.local_state
-WindowsPath('C:/Users/g/AppData/Local/Microsoft/Edge Beta/User Data/Local State')
+WindowsPath('C:/Users/username/AppData/Local/Microsoft/Edge Beta/User Data/Local State')
 ```
 
 ### A temporary copy of the Cookies file is created on init of class Cookies
