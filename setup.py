@@ -5,7 +5,7 @@ from shutil import rmtree
 from setuptools import find_packages, setup, Command
 
 NAME = 'mscookiejar'
-DESCRIPTION = 'Loads decrypted cookiejar from Chromium-based browsers running on Microsoft Windows machines.'
+DESCRIPTION = 'Loads decrypted cookiejars from Chromium based browsers running on Microsoft Windows.'
 URL = "https://github.com/yportne8/Microsoft-CookieJar/"
 EMAIL = 'yportne8@gmail.com'
 AUTHOR = 'CS Kim'
