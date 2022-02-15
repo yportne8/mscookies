@@ -66,8 +66,8 @@ A temporary copy of the Cookies file is created on init of class Cookies.
 WindowsPath('C:/Users/username/AppData/Local/Temp/Cookies')
 ```
 
-### Cookiejar and Cookies functions
-The cookiejar and cookies functions implements a modified version of class http.cookiejar.CookieJar. This approach allows for greater utility than using http.cookiejar.LWPCookieJar, at least when saving the cookiejar as a txt file.
+### Cookiejar and Cookie functions
+Both functions implement a modified version of class http.cookiejar.CookieJar. This approach allows for easier identification of the target path than LWPCookieJar, at least when the task is simply saving the cookiejar as a txt file.
 ```python
 >>> cookiejar = cookies.cookiejar()
 >>> saved_to_path = cookiejar.save()
