@@ -19,15 +19,13 @@ python setup.py install
 
 ### Identify the main directory for locally installed Chromium-based Browsers.
 ```python
-from mscookies import Cookies
-
+>>> from mscookies import Cookies
 >>> Cookies.CHROMIUM_BASED
 ['Opera', 'Opera Next', 'Opera Developer', 
  'Edge', 'Edge Beta', 'Edge Dev', 'Edge Canary',
  'Chrome', 'Chrome Beta', 'Chrome Dev', 'Chrome Canary',
  'Chromium', 'Chromium Beta', 'Chromium Dev', 'Chromium Canary',
  'Brave-Browser', 'Brave-Browser-Beta', 'Brave-Browser-Nightly']
-
 >>> Cookies.browser_paths()
 {'Chromium': 'C:\\Users\\username\\AppData\\Local\\Chromium',
  'Chrome': 'C:\\Users\\username\\AppData\\Local\\Google\\Chrome', 
