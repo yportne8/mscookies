@@ -6,7 +6,7 @@ from setuptools import find_packages, setup, Command
 
 NAME = 'pyBrowserCookies'
 DESCRIPTION = 'Loads decrypted cookiejars from Chromium based browsers running on Windows.'
-URL = "https://github.com/yportne8/MS-Cookies/"
+URL = "https://github.com/yportne8/pyBrowserCookies/"
 EMAIL = 'yportne8@gmail.com'
 AUTHOR = 'CS Kim'
 REQUIRES_PYTHON = '>=3.6.0'
