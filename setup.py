@@ -4,8 +4,8 @@ import sys
 from shutil import rmtree
 from setuptools import find_packages, setup, Command
 
-NAME = 'mscookies'
-DESCRIPTION = 'Loads decrypted cookiejars from Chromium based browsers running on Microsoft Windows.'
+NAME = 'pyBrowserCookies'
+DESCRIPTION = 'Loads decrypted cookiejars from Chromium based browsers running on Windows.'
 URL = "https://github.com/yportne8/MS-Cookies/"
 EMAIL = 'yportne8@gmail.com'
 AUTHOR = 'CS Kim'
