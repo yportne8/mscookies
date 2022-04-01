@@ -199,7 +199,7 @@ class Profile(Browser):
     def _picture(self) -> Path:
         for p in self.profile_path.resolve().glob('**/*'):
             if p.is_file():
-                if p.suffix == ".png" and \
+                if p.suffix in [".png", ".ico"]  and \
                         ("Default" in p.stem or \
                             "Profile" in p.stem):
                     return p
