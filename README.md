@@ -12,8 +12,8 @@ pip install mscookies
 
 ## Installation from source:
 ```
-git clone https://github.com/yportne8/MS-Cookies.git
-cd MS-Cookies
+git clone https://github.com/yportne8/mscookies.git
+cd mscookies
 python setup.py install
 ```
 
