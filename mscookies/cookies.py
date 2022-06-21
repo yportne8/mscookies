@@ -96,12 +96,6 @@ class Browser(Browsers):
         else:
             return str(list(self.browser_paths().keys()))
 
-    def __repr__(self):
-        if self.name:
-            return self.name
-        else:
-            return str(list(self.browser_paths().keys()))
-
     def _doesnotexist(name: str, path: Path):
         msg = f"{name} does not exist "
         msg += f"within {str(path)}"
